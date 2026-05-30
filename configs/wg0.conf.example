@@ -1,0 +1,12 @@
+[Interface]
+PrivateKey = PK
+Address = 10.0.0.4/24
+DNS = 8.8.8.8
+
+[Peer]
+PublicKey = PK
+Endpoint = IP:51820
+AllowedIPs = 0.0.0.0/0
+PersistentKeepalive = 25
+
+
