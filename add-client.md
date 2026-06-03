@@ -13,8 +13,6 @@ cat client2_private.key
 cat client2_public.key
 ```
 
----
-
 ## 2. Добавить клиента на сервер
 
 Открыть конфигурацию сервера:
@@ -63,8 +61,6 @@ Endpoint = SERVER_IP:51820
 AllowedIPs = 0.0.0.0/0
 PersistentKeepalive = 25
 ```
-
----
 
 ## 4. Передать конфигурацию клиенту
 
