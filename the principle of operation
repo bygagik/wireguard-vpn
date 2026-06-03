@@ -1,0 +1,1 @@
+VPN клиент (10.0.0.2) ➟ wg0 (VPN туннель) ➟ Linux routing table ➟ iptables NAT ➟ eth0 (публичный IP) ➟ Интернет
