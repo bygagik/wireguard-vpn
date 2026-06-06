@@ -1,1 +1,10 @@
-VPN клиент (10.0.0.2) ➟ wg0 (VPN туннель) ➟ Linux routing table ➟ iptables NAT ➟ eth0 (публичный IP) ➟ Интернет
+# WireGuard traffic flow
+
+Client traffic flow through the VPN system:
+
+VPN Client (10.0.0.2)
+→ WireGuard interface (wg0)
+→ Linux routing table
+→ iptables NAT (masquerading)
+→ Physical interface (eth0)
+→ Internet
