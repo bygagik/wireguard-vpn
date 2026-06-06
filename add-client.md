@@ -1,57 +1,46 @@
-# Добавление нового клиента WireGuard
+# Adding a new WireGuard client
 
-## 1. Сгенерировать ключи клиента
+## 1. Generate client keys
 
-```bash
-wg genkey | tee client2_private.key | wg pubkey > client2_public.key
-```
+Generate private and public keys:
 
-Проверить ключи:
+wg genkey | tee client_private.key | wg pubkey > client_public.key
 
-```bash
-cat client2_private.key
-cat client2_public.key
-```
+Check generated keys:
 
-## 2. Добавить клиента на сервер
-
-Открыть конфигурацию сервера:
-
-```bash
-nano /etc/wireguard/wg0.conf
-```
-
-Добавить в конец файла:
-
-```ini
-[Peer]
-PublicKey = CLIENT2_PUBLIC_KEY
-AllowedIPs = 10.0.0.4/32
-```
-
-Сохранить изменения.
-
-Применить конфигурацию:
-
-```bash
-wg syncconf wg0 <(wg-quick strip wg0)
-```
-
-Проверить:
-
-```bash
-wg show
-```
+cat client_private.key
+cat client_public.key
 
 ---
 
-## 3. Создать конфигурацию клиента
+## 2. Add client to server
 
-Создать файл `client2.conf`:
+Edit WireGuard configuration:
 
-```ini
+nano /etc/wireguard/wg0.conf
+
+Add a new peer:
+
+[Peer]
+PublicKey = CLIENT_PUBLIC_KEY
+AllowedIPs = 10.0.0.4/32
+
+Apply changes:
+
+wg syncconf wg0 <(wg-quick strip wg0)
+
+Verify:
+
+wg show
+
+---
+
+## 3. Create client configuration
+
+Create file `client.conf`:
+
 [Interface]
-PrivateKey = CLIENT2_PRIVATE_KEY
+PrivateKey = CLIENT_PRIVATE_KEY
 Address = 10.0.0.4/24
 DNS = 8.8.8.8
 
@@ -60,19 +49,17 @@ PublicKey = SERVER_PUBLIC_KEY
 Endpoint = SERVER_IP:51820
 AllowedIPs = 0.0.0.0/0
 PersistentKeepalive = 25
-```
 
-## 4. Передать конфигурацию клиенту
+---
 
-Импортировать файл `client2.conf` в приложение WireGuard:
+## 4. Import configuration on client
 
-## 5. Проверить подключение
+Import `client.conf` into the WireGuard application and enable the tunnel.
 
-На клиенте включить VPN.
+---
 
-На сервере выполнить:
+## 5. Verify connection
 
-```bash
+On the server:
+
 wg show
-```
-
